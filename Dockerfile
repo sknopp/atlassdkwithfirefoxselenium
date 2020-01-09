@@ -16,7 +16,9 @@ RUN apt update \
 ENV PATH=$PATH:/home
 ENV DISPLAY=:99
 
+EXPOSE 6990
 VOLUME /root/.m2/repository
+
 WORKDIR /app
 
 ENTRYPOINT ["../runAtlasMvn.sh"]
