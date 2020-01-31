@@ -26,7 +26,7 @@ You must add a property in your plugins `pom.xml` as follows so this image can w
 Switch into your project home directory and run the following command:
 
 ```bash
-docker run -it --rm -p 6990:6990 --stop-timeout 60 --mount type=bind,source="$(pwd)",target=/app --mount source=atlasmvncache,target=/root/.m2/repository sknopp94/atlassdkwithfirefoxselenium <atlas-tool-suffix> <atlas-tool-parameters>
+docker run -it --rm -p 6990:6990 --stop-timeout 60 --name atlassdk --mount type=bind,source="$(pwd)",target=/app --mount source=atlasmvncache,target=/root/.m2/repository sknopp94/atlassdkwithfirefoxselenium <atlas-tool-suffix> <atlas-tool-parameters>
 ```
 
 **short explanation**
@@ -34,6 +34,7 @@ docker run -it --rm -p 6990:6990 --stop-timeout 60 --mount type=bind,source="$(p
  * The containers can be used once only. So use the `--rm` flag! 
  * maybe we want to access our Atlassian instance, so we expose the therefore needed ports (`-p`). Use the correct port numbers for your Atlassian product (6990 here for Bamboo)
  * `--stop-timeout 60` after the container is stopped it still needs some time for shutting down Atlassian and copying back the /target-directory to the host system. If you are debugging FileNotFoundExceptions from Atlassian try to increase this value.
+ * `--name atlassdk` set a fixed container name for easier reusage of docker commands
  * The first `--mount` is binding your project directory
  * The second `--mount` creates/binds the cache volume for maven repo files
  * `<atlas-tool-suffix>` could be set to `package`, `run`, `debug` for example. \
