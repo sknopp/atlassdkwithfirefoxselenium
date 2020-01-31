@@ -19,6 +19,7 @@ ENV DISPLAY=:99
 EXPOSE 6990
 VOLUME /root/.m2/repository
 
+ENV ATLAS_TARGET_DIR=/tmp/target
 WORKDIR /app
 
 ENTRYPOINT ["../runAtlasMvn.sh"]

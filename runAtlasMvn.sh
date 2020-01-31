@@ -1,15 +1,17 @@
 #!/bin/bash
 
-TARGET_FOLDER=/tmp/target
+TARGET_FOLDER=$ATLAS_TARGET_DIR
 
 trap 'exit 0' INT SIGTERM
 
 # launch pseudo display for selenium tests
 Xvfb :99 &
 
-#echo "loading project files into docker container. This could take a second, please wait ..."
-#cp -r /app /tmp/ && cd /tmp/app
-
+if [ -d /app/target ]
+then
+	echo "loading existing project target files into docker container. This could take a second, please wait ..."
+	cp -r /app/target /tmp/
+fi
 
 function copy_back_on_signal() {
 	trap '' INT
@@ -17,8 +19,9 @@ function copy_back_on_signal() {
 	rm -rf $TARGET_FOLDER
 
 	# check if target folder still exists (maybe 'clean' has been run?)
-	if [ -d $TARGET_FOLDER ]
+	if [ -d "$TARGET_FOLDER" ]
 	then
+		echo "found target folder!"
 	        cp -r $TARGET_FOLDER /app
 	fi
 }
