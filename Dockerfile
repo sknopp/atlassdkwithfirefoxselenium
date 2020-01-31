@@ -7,7 +7,7 @@ WORKDIR /home/
 
 # install required selenium dependencies
 RUN apt update \
-    && apt install -y wget firefox xvfb xsel xclip \
+    && apt install -y git wget firefox xvfb xsel xclip \
     && wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz \
     && tar -xvzf geckodriver.tar.gz \
     && chmod +x geckodriver \
