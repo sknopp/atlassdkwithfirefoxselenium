@@ -42,3 +42,7 @@ This would start the corresponding atlassian cli-tool `atlas-package`, `atlas-ru
 # How it works
 
 Because Docker does not work performant enough on the root file system directly (at least on macOS), this image needs to move the target directory to an internal path. (You'll find it in containers under `/tmp/target/`). After the build has finished the target-folder is copied back to the host-system for enabling further investigations and reusage.
+
+# Known limitations
+
+ * Unfortunately the image is not useful during active development, because Atlassians file change detection doesn't work, neither in your source-directory nor in the target-dir. Once started, the only way to update your plugin is a full restart. (tested on macOS 10.15.2 with Docker 2.2.0.0)
