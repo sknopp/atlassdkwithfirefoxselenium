@@ -2,6 +2,25 @@ based on linkyards [docker-atlassian-plugin-sdk](https://hub.docker.com/r/linkya
 
 Also have a look on the [corresponding Docker Hub page](https://hub.docker.com/r/sknopp94/atlassdkwithfirefoxselenium) for this image.
 
+# Plugin Preparation _(required!)_
+
+You must add a property in your plugins `pom.xml` as follows so this image can work:
+
+```xml
+<project>
+	<!-- ... -->
+	<properties>
+		<!-- ... -->
+		<buildDirectory>${project.basedir}/target</buildDirectory>
+	</properties>
+	<!-- ... -->
+	<build>
+		<directory>${buildDirectory}</directory>
+		<!-- ... -->
+	</build>
+</project>
+```
+
 # Usage
 
 Switch into your project home directory and run the following command:
@@ -22,4 +41,4 @@ This would start the corresponding atlassian cli-tool `atlas-package`, `atlas-ru
 
 # How it works
 
-Because Docker does not work performant enough on the root file system directly, this image needs to move the project directory to an internal path. (You'll find it in containers under `/tmp/app/`). After the build has finished the target-folder is copied back to the host-system for further investigations.
+Because Docker does not work performant enough on the root file system directly (at least on macOS), this image needs to move the target directory to an internal path. (You'll find it in containers under `/tmp/target/`). After the build has finished the target-folder is copied back to the host-system for enabling further investigations and reusage.
