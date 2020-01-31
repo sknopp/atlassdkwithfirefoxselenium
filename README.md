@@ -1,5 +1,7 @@
 based on linkyards [docker-atlassian-plugin-sdk](https://hub.docker.com/r/linkyard/docker-atlassian-plugin-sdk/)
 
+Also have a look on the [corresponding Docker Hub page](https://hub.docker.com/r/sknopp94/atlassdkwithfirefoxselenium) for this image.
+
 # Usage
 
 Switch into your project home directory and run the following command:
